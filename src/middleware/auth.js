@@ -10,7 +10,7 @@ const authenticationUser = function (req, res, next) {
     let decodedToken = jwt.verify(token, "nikita singh");          //verifying token with secret key
 
     if (!decodedToken)
-      return res.status(400).send({ status: false, msg: "token is invalid" });      //validating token value inside decodedToken
+      return res.status(401).send({ status: false, msg: "token is invalid" });      //validating token value inside decodedToken
 
     next();
 
@@ -32,7 +32,7 @@ const authorisationUser = async function (req, res, next) {
     let bookById = await BookModel.findOne({ _id: bookId, isDeleted: false }).select({ userId: 1 })
 
     if (authorisedUser !== bookById.userId.toString()) {
-      return res.status(401).send({ status: false, msg: "You are not an authorized person to make these changes" })
+      return res.status(403).send({ status: false, msg: "You are not an authorized person to make these changes" })
     }
     next();
   }
