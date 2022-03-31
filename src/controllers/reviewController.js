@@ -66,6 +66,9 @@ const updateReview = async function (req, res) {
         if (Object.keys(body).length === 0) {
             return res.status(400).send({ status: false, msg: "Enter Data to update." })
         }
+         if (Object.keys(req.query).length > 0) {
+            return res.status(400).send({ status: false, message: "please don't provide value on params " })
+        }
         if (!isValidObjectId(bookId)) {
             res.status(400).send({ status: false, message: `${bookId} is not a valid book id` })
             return
@@ -113,7 +116,11 @@ const deleteReviewById = async function (req, res) {
     try {
         let book = req.params.bookId;
         let review = req.params.reviewId;
-
+        
+        
+         if (Object.keys(req.query).length > 0) {
+            return res.status(400).send({ status: false, message: "please don't provide value on params " })
+        }
         if (!isValidObjectId(book)) {
             res.status(400).send({ status: false, message: `${book} is not a valid book id` })
             return
