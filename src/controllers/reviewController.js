@@ -30,7 +30,7 @@ const review = async function (req, res) {
 
         let bookidPresent = await BookModel.findById(bookId)
         if (!bookidPresent) {
-            return res.status(400).send({ status: false, msg: "Sorry This bookId Is Not Present" })
+            return res.status(404).send({ status: false, msg: "Sorry This bookId Is Not Present" })
         };
 
         // VALIDATING RATING:
@@ -103,7 +103,7 @@ const updateReview = async function (req, res) {
         let updatedata = req.body;
         let updatedReview = await ReviewModel.findOneAndUpdate({ _id: reviewId }, { rating: updatedata.rating, reviewedBy: updatedata.reviewedBy, review: updatedata.review }, { new: true, upsert: true });
 
-        return res.status(201).send({ status: true, message: "Success", data: updatedReview })
+        return res.status(200).send({ status: true, message: "Success", data: updatedReview })
 
     } catch (err) {
         return res.status(500).send({ Error: err.message })
