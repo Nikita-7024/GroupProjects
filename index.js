@@ -11,7 +11,7 @@ app.use(multer().any());
 
 try {
     //Insert your MongoDB Atlas String here:
-    mongoose.connect("mongodb://0.0.0.0:27017/Products-Management", {useNewUrlParser:true});
+    mongoose.connect("mongodb+srv://rahat6713:1819rahat@cluster0.iee0y.mongodb.net/Project-2-Group-1?retryWrites=true&w=majority", {useNewUrlParser:true});
     console.log(`MongoDB Connection Successful`);
 } catch (error) {
     console.log(error);

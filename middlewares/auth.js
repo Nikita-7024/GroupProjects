@@ -12,7 +12,7 @@ const auth = async (req, res, next) => {
         req.user = decodedToken;
         next();
       } else {
-        res.status(400).json({ status: false, msg: "Token is Missing" });
+        res.status(400).json({ status: false, msg: "you are not authorised" });
       }
     }
   } catch (error) {
